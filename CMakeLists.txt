@@ -9,12 +9,19 @@ project("MyApp")
 
 # CEF configuration
 set_property(GLOBAL PROPERTY OS_FOLDERS ON)
-set(CEF_VERSION "120.2.7+g4bc6a59+chromium-120.0.6099.234")
+# set(CEF_VERSION "120.2.7+g4bc6a59+chromium-120.0.6099.234")
+
+# set cache string cef_version
+set(CEF_VERSION "120.2.7+g4bc6a59+chromium-120.0.6099.234" CACHE STRING "CEF version to download")
+message(STATUS "CEF version: ${CEF_VERSION}")
+
+# architecture
+message(STATUS "arch: ${CMAKE_SYSTEM_PROCESSOR}")
 
 # Determine the platform
 if(NOT DEFINED CEF_PLATFORM)
   if("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
-    if("${PROJECT_ARCH}" STREQUAL "arm64")
+    if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "arm64")
       set(CEF_PLATFORM "macosarm64")
     else()
       set(CEF_PLATFORM "macosx64")
